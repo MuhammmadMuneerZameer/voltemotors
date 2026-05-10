@@ -6,6 +6,59 @@
     <meta name="description" content="SuperVolt EV Service Center - Expert electric scooter & bike service in Pune. Fast repairs, genuine parts, expert technicians.">
     <meta name="keywords" content="EV service, electric scooter repair, electric bike service, Pune, SuperVolt, battery service, OLA, Ather, TVS, Bajaj">
     <title>SuperVolt EV Service Center – Premium EV Service in Pune</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2300b848' d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/></svg>">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://supervoltemotors.com">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://supervoltemotors.com">
+    <meta property="og:site_name"   content="SuperVolt EV Service Center">
+    <meta property="og:title"       content="SuperVolt EV Service Center – Premium EV Service in Pune">
+    <meta property="og:description" content="Expert electric scooter & bike service in Pune. Fast repairs, genuine parts, certified technicians for OLA, Ather, TVS, Bajaj & all major EV brands.">
+    <meta property="og:image"       content="https://supervoltemotors.com/images/IMG_8673.PNG">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="SuperVolt EV Service Center – Premium EV Service in Pune">
+    <meta name="twitter:description" content="Expert EV service in Pune. Fast repairs, genuine parts, certified technicians.">
+    <meta name="twitter:image"       content="https://supervoltemotors.com/images/IMG_8673.PNG">
+
+    <!-- Structured Data: Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "SuperVolt EV Service Center",
+      "description": "Expert electric scooter and electric bike service center in Pune. Fast repairs, genuine parts, certified technicians.",
+      "url": "https://supervoltemotors.com",
+      "telephone": "+917972792916",
+      "email": "info@supervoltemotors.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 18.4580993,
+        "longitude": 73.8486261
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "10:00",
+        "closes": "20:00"
+      },
+      "sameAs": ["https://instagram.com/supe_rvolt"],
+      "priceRange": "₹₹"
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1346,19 +1399,31 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/IMG_8400.JPG.jpeg" alt="SuperVolt EV Workshop" loading="lazy">
+                <picture>
+                    <source srcset="images/IMG_8400.JPG.webp" type="image/webp">
+                    <img src="images/IMG_8400.JPG.jpeg" alt="SuperVolt EV Workshop" loading="lazy">
+                </picture>
                 <div class="gallery-overlay"><span data-en="EV Workshop Bay" data-mr="EV वर्कशॉप बे">EV Workshop Bay</span></div>
             </div>
             <div class="gallery-item">
-                <img src="images/IMG_8552.JPG.jpeg" alt="SuperVolt EV Technician" loading="lazy">
+                <picture>
+                    <source srcset="images/IMG_8552.JPG.webp" type="image/webp">
+                    <img src="images/IMG_8552.JPG.jpeg" alt="SuperVolt EV Technician" loading="lazy">
+                </picture>
                 <div class="gallery-overlay"><span data-en="Expert Technicians" data-mr="विशेषज्ञ तकनीशियन">Expert Technicians</span></div>
             </div>
             <div class="gallery-item">
-                <img src="images/IMG_8672.PNG" alt="SuperVolt EV Parts" loading="lazy">
+                <picture>
+                    <source srcset="images/IMG_8672.webp" type="image/webp">
+                    <img src="images/IMG_8672.PNG" alt="SuperVolt EV Parts" loading="lazy">
+                </picture>
                 <div class="gallery-overlay"><span data-en="Genuine EV Parts" data-mr="असली EV पार्ट्स">Genuine EV Parts</span></div>
             </div>
             <div class="gallery-item">
-                <img src="images/IMG_8673.PNG" alt="SuperVolt EV Service" loading="lazy">
+                <picture>
+                    <source srcset="images/IMG_8673.webp" type="image/webp">
+                    <img src="images/IMG_8673.PNG" alt="SuperVolt EV Service" loading="lazy">
+                </picture>
                 <div class="gallery-overlay"><span data-en="Premium Service" data-mr="प्रीमियम सेवा">Premium Service</span></div>
             </div>
         </div>
@@ -1574,7 +1639,7 @@
 
                 <form action="https://formsubmit.co/info@supervoltemotors.com" method="POST" onsubmit="handleSubmit(event)">
                     <input type="hidden" name="_subject" value="New Service Request — SuperVolt Motors">
-                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://supervoltemotors.com?sent=1">
                     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
                     <div class="form-row">
@@ -1799,6 +1864,8 @@
 
     /* ===== HERO VIDEO CYCLER ===== */
     (function () {
+        // To use a CDN: replace each local filename with the full CDN URL
+        // e.g. 'https://res.cloudinary.com/YOUR_CLOUD/video/upload/Video_Project_Headlight_compressed.mp4'
         const videos = [
             'Video_Project_Headlight_compressed.mp4',
             'Video_Project_Light_bulb_compressed.mp4',
@@ -1838,7 +1905,7 @@
     /* ===== POPUP AD SYSTEM (Strapi) ===== */
     (function () {
         const DEFAULT_CONFIG = {
-            enabled:    true,
+            enabled:    false,
             delay:      3,
             frequency:  'every_visit',
             adImageUrl: '',

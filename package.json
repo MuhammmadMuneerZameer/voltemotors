@@ -1,0 +1,12 @@
+{
+  "name": "supervolt-website",
+  "version": "1.0.0",
+  "description": "SuperVolt EV Service Center — static website",
+  "scripts": {
+    "serve": "npx serve . -p 3000"
+  },
+  "private": true,
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
