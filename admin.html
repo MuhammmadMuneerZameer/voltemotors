@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperVolt – Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --bg:       #080808;
+            --bg2:      #0f0f0f;
+            --bg3:      #161616;
+            --card:     #1a1a1a;
+            --accent:   #00b848;
+            --accent2:  #00e05a;
+            --glow:     rgba(0,184,72,0.2);
+            --text:     #f0f0f0;
+            --text2:    #888;
+            --border:   rgba(255,255,255,0.07);
+            --border-a: rgba(0,184,72,0.3);
+            --danger:   #ff4444;
+            --warn:     #f5a623;
+            --radius:   12px;
+        }
+
+        html, body { height: 100%; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+
+        /* ===== LOGIN ===== */
+        #login-screen {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,184,72,0.08) 0%, transparent 60%);
+            padding: 20px;
+        }
+        .login-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px 40px;
+            width: 100%; max-width: 420px;
+            text-align: center;
+        }
+        .login-icon {
+            width: 64px; height: 64px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .login-icon svg { width: 32px; height: 32px; fill: #000; }
+        .login-box h1  { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-bottom: 4px; }
+        .login-box .sub { font-size: 0.8rem; color: var(--text2); margin-bottom: 32px; }
+        .login-field   { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; text-align: left; }
+        .login-field label { font-size: 0.72rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.09em; }
+        .login-field input {
+            background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+            padding: 12px 14px; color: var(--text); font-family: 'Inter'; font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .login-field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+        .login-btn {
+            width: 100%; background: var(--accent); color: #000; font-weight: 700;
+            font-size: 0.9rem; padding: 13px; border-radius: 8px; border: none;
+            cursor: pointer; margin-top: 8px; transition: background 0.2s;
+        }
+        .login-btn:hover { background: var(--accent2); }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .login-error {
+            background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3);
+            color: #ff6b6b; padding: 10px 14px; border-radius: 8px;
+            font-size: 0.83rem; margin-top: 12px; display: none;
+        }
+        .setup-note {
+            margin-top: 20px; padding: 14px 16px;
+            background: rgba(0,184,72,0.06); border: 1px solid var(--border-a);
+            border-radius: 10px; text-align: left;
+        }
+        .setup-note h4 { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .setup-note ol { padding-left: 16px; }
+        .setup-note li { font-size: 0.78rem; color: var(--text2); margin-bottom: 4px; line-height: 1.5; }
+        .setup-note code { background: rgba(255,255,255,0.07); padding: 1px 5px; border-radius: 3px; font-size: 0.75rem; color: var(--accent); }
+
+        /* ===== DASHBOARD ===== */
+        #dashboard { display: none; min-height: 100vh; flex-direction: column; }
+        #dashboard.visible { display: flex; }
+        .dash-layout { display: flex; flex: 1; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px; background: var(--bg2); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; padding: 24px 0;
+            position: sticky; top: 0; height: 100vh; overflow-y: auto;
+        }
+        .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 0 20px 28px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+        .brand-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .brand-icon svg { width: 16px; height: 16px; fill: #000; }
+        .brand-name { font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 0.05em; }
+        .brand-sub  { font-size: 0.62rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; display: block; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 12px; flex: 1; }
+        .nav-item {
+            display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+            border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text2);
+            cursor: pointer; transition: all 0.2s; border: none; background: none;
+            width: 100%; text-align: left; text-decoration: none;
+        }
+        .nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+        .nav-item.active { background: rgba(0,184,72,0.1); color: var(--accent); border: 1px solid var(--border-a); }
+        .sidebar-footer { padding: 16px 20px 0; border-top: 1px solid var(--border); }
+        .user-chip { display: flex; align-items: center; gap: 8px; padding: 10px 0 12px; }
+        .user-avatar { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #000; flex-shrink: 0; }
+        .user-email { font-size: 0.72rem; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .logout-btn { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text2); cursor: pointer; background: none; border: none; padding: 4px 0 8px; transition: color 0.2s; width: 100%; }
+        .logout-btn:hover { color: var(--danger); }
+        .logout-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Main */
+        .dash-main { flex: 1; padding: 40px; overflow-y: auto; max-width: 900px; }
+        .page-header { margin-bottom: 32px; }
+        .page-header h2 { font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 4px; }
+        .page-header p  { font-size: 0.875rem; color: var(--text2); }
+
+        /* Cards */
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+        .card-header h3 { font-family: 'Bebas Neue'; font-size: 1.2rem; letter-spacing: 0.04em; }
+        .card-header .hint { font-size: 0.72rem; color: var(--text2); }
+
+        /* Fields */
+        .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+        .field label { font-size: 0.72rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.09em; }
+        .field input[type="text"], .field input[type="number"], .field input[type="url"], .field select {
+            background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+            padding: 11px 14px; color: var(--text); font-family: 'Inter'; font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s; max-width: 480px; width: 100%;
+        }
+        .field select { appearance: none; }
+        .field select option { background: var(--bg3); }
+        .field input:focus, .field select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+        .field-hint { font-size: 0.75rem; color: var(--text2); }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* Toggle */
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+        .toggle-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+        .toggle-info p  { font-size: 0.8rem; color: var(--text2); }
+        .toggle { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-track { position: absolute; inset: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 13px; cursor: pointer; transition: all 0.25s; }
+        .toggle-track::before { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; background: var(--text2); border-radius: 50%; transition: all 0.25s; }
+        .toggle input:checked + .toggle-track { background: rgba(0,184,72,0.2); border-color: var(--accent); }
+        .toggle input:checked + .toggle-track::before { transform: translateX(20px); background: var(--accent); }
+
+        /* Image upload */
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+            max-width: 480px;
+        }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(0,184,72,0.04); }
+        .upload-zone.drag-over { border-color: var(--accent); background: rgba(0,184,72,0.08); }
+        .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+        .upload-icon { width: 40px; height: 40px; margin: 0 auto 12px; opacity: 0.4; }
+        .upload-icon svg { width: 100%; height: 100%; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .upload-zone p { font-size: 0.875rem; color: var(--text2); }
+        .upload-zone span { font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+        /* Image preview */
+        .img-preview-wrap {
+            margin-top: 14px;
+            max-width: 480px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+            position: relative;
+        }
+        .img-preview-wrap img { width: 100%; height: auto; display: block; }
+        .img-preview-badge {
+            position: absolute; top: 8px; left: 8px;
+            background: rgba(0,0,0,0.7); border: 1px solid var(--border-a);
+            color: var(--accent); font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 3px 8px; border-radius: 4px;
+        }
+
+        /* Upload progress */
+        .progress-wrap { max-width: 480px; margin-top: 12px; display: none; }
+        .progress-bar-bg { background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.2s; width: 0%; }
+        .progress-label { font-size: 0.75rem; color: var(--text2); margin-top: 6px; }
+
+        /* Stat tiles */
+        .stat-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+        .stat-tile { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+        .stat-tile .val { font-family: 'Bebas Neue'; font-size: 1.9rem; color: var(--accent); line-height: 1; }
+        .stat-tile .lbl { font-size: 0.7rem; color: var(--text2); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* Status badge */
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+        .status-badge.on  { background: rgba(0,184,72,0.12); color: var(--accent); border: 1px solid var(--border-a); }
+        .status-badge.off { background: rgba(255,68,68,0.1); color: #ff6b6b; border: 1px solid rgba(255,68,68,0.3); }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: blink 1.2s infinite; }
+
+        /* Buttons */
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 7px; }
+        .btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-green   { background: var(--accent); color: #000; }
+        .btn-green:hover { background: var(--accent2); }
+        .btn-green:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-danger  { background: transparent; color: var(--danger); border: 1px solid rgba(255,68,68,0.3); }
+        .btn-danger:hover { background: rgba(255,68,68,0.1); }
+
+        /* Preview overlay */
+        #admin-popup-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.82); backdrop-filter: blur(6px);
+            z-index: 9998; display: flex; align-items: center; justify-content: center; padding: 20px;
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        #admin-popup-overlay.visible { opacity: 1; pointer-events: all; }
+        #admin-popup-modal {
+            background: #1a1a1a; border: 1px solid rgba(0,184,72,0.35);
+            border-radius: 18px; overflow: hidden; max-width: 420px; width: 100%;
+            position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        #admin-popup-overlay.visible #admin-popup-modal { transform: scale(1) translateY(0); }
+        .preview-banner { background: rgba(245,166,35,0.15); border-bottom: 1px solid rgba(245,166,35,0.3); padding: 7px 16px; font-size: 0.7rem; font-weight: 700; color: var(--warn); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
+        #admin-popup-close { position: absolute; top: 40px; right: 12px; width: 32px; height: 32px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s; }
+        #admin-popup-close:hover { background: rgba(255,68,68,0.3); }
+        #admin-popup-close svg { width: 13px; height: 13px; stroke: #f0f0f0; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+        #admin-popup-img { width: 100%; height: auto; display: block; }
+        #admin-popup-body { padding: 18px 22px; }
+        #admin-popup-title { font-family: 'Bebas Neue'; font-size: 1.4rem; color: #f0f0f0; margin-bottom: 5px; display: none; }
+        #admin-popup-subtitle { font-size: 0.875rem; color: #888; margin-bottom: 12px; display: none; }
+        #admin-popup-cta { display: none; background: var(--accent); color: #000; font-weight: 700; font-size: 0.875rem; padding: 11px 18px; border-radius: 8px; border: none; cursor: pointer; width: 100%; }
+
+        /* Toast */
+        #toast { position: fixed; bottom: 24px; right: 24px; background: var(--card); border: 1px solid var(--border-a); border-radius: 10px; padding: 13px 18px; font-size: 0.875rem; font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: center; gap: 10px; min-width: 200px; }
+        #toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Cloud setup card */
+        .setup-card { background: rgba(0,184,72,0.04); border: 1px solid var(--border-a); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 20px; }
+        .setup-card h4 { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+        .setup-card ol { padding-left: 16px; }
+        .setup-card li { font-size: 0.82rem; color: var(--text2); margin-bottom: 6px; line-height: 1.5; }
+        .setup-card code { background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 3px; font-size: 0.78rem; color: var(--accent); }
+
+        @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .dash-main { padding: 24px 16px; }
+            .stat-tiles { grid-template-columns: 1fr 1fr; }
+            .field-row { grid-template-columns: 1fr; }
+            .actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="login-screen">
+    <div class="login-box">
+        <div class="login-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h1>SUPERVOLT</h1>
+        <p class="sub">Admin Dashboard &mdash; Sign in to manage your popup ads</p>
+
+        <form id="login-form" onsubmit="doLogin(event)">
+            <div class="login-field">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="admin@example.com" autocomplete="username" required>
+            </div>
+            <div class="login-field">
+                <label>Password</label>
+                <input type="password" id="login-pass" placeholder="Your Strapi password" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="login-btn" id="login-btn">Sign In</button>
+        </form>
+        <div class="login-error" id="login-error">Incorrect email or password.</div>
+
+        <div class="setup-note">
+            <h4>First time setup?</h4>
+            <ol>
+                <li>Open <code>strapi-config.js</code> and paste your Strapi server URL</li>
+                <li>In Strapi Admin → Settings → Users &amp; Permissions → Roles → <strong>Public</strong> → popup-ad → enable <code>find</code></li>
+                <li>Roles → <strong>Authenticated</strong> → popup-ad → enable <code>find</code> &amp; <code>update</code>; Upload → enable <code>upload</code></li>
+                <li>Settings → Users → Add a user with email &amp; password, then sign in here</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard">
+    <div class="dash-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div>
+                    <div class="brand-name">SUPERVOLT</div>
+                    <span class="brand-sub">Admin Panel</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+                    Popup Ads
+                </button>
+                <a href="index.html" target="_blank" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Live Site
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-chip">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                    <div class="user-email" id="user-email">loading...</div>
+                </div>
+                <button class="logout-btn" onclick="doLogout()">
+                    <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="dash-main">
+            <div class="page-header">
+                <h2>Popup Ad Manager</h2>
+                <p>Upload an ad image and configure how it appears on your website. Changes go live instantly.</p>
+            </div>
+
+            <!-- Strapi setup reminder (hidden once configured) -->
+            <div class="setup-card" id="setup-reminder" style="display:none">
+                <h4>Strapi Permissions Required</h4>
+                <ol>
+                    <li>Strapi Admin → Settings → Users &amp; Permissions → Roles → <strong>Public</strong> → popup-ad → enable <code>find</code></li>
+                    <li>Roles → <strong>Authenticated</strong> → popup-ad → enable <code>find</code> &amp; <code>update</code>; Upload → enable <code>upload</code></li>
+                </ol>
+            </div>
+
+            <!-- Status tiles -->
+            <div class="stat-tiles">
+                <div class="stat-tile">
+                    <div class="val" id="tile-status">—</div>
+                    <div class="lbl">Status</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="val" id="tile-delay">—</div>
+                    <div class="lbl">Delay (sec)</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="val" id="tile-freq">—</div>
+                    <div class="lbl">Frequency</div>
+                </div>
+            </div>
+
+            <!-- Enable / Disable -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Popup Status</h3>
+                    <span id="status-badge-wrap"></span>
+                </div>
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Enable Popup Ad</h4>
+                        <p>When on, the popup will appear on the website according to the settings below.</p>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="cfg-enabled" onchange="updateBadge()">
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Timing -->
+            <div class="card">
+                <div class="card-header"><h3>Timing &amp; Frequency</h3></div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Delay before showing (seconds)</label>
+                        <input type="number" id="cfg-delay" min="0" max="60" value="3">
+                        <span class="field-hint">0 = show immediately on page load</span>
+                    </div>
+                    <div class="field">
+                        <label>Display Frequency</label>
+                        <select id="cfg-frequency">
+                            <option value="every_visit">Every Visit</option>
+                            <option value="once_per_session">Once Per Browser Session</option>
+                            <option value="once_per_day">Once Per Day</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Image -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ad Image</h3>
+                    <span class="hint">Uploaded to Strapi Media Library — accessible from anywhere</span>
+                </div>
+
+                <div class="upload-zone" id="upload-zone">
+                    <input type="file" id="file-input" accept="image/*" onchange="onFileSelected(event)">
+                    <div class="upload-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                    </div>
+                    <p>Drag &amp; drop or click to choose an ad image</p>
+                    <span>PNG, JPG, GIF, WEBP supported</span>
+                </div>
+
+                <div class="progress-wrap" id="progress-wrap">
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
+                    <div class="progress-label" id="progress-label">Uploading…</div>
+                </div>
+
+                <div class="img-preview-wrap" id="img-preview-wrap">
+                    <span class="img-preview-badge" id="preview-badge">Current Ad</span>
+                    <img id="img-preview" src="" alt="Ad preview">
+                </div>
+            </div>
+
+            <!-- Text & CTA -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Optional Text &amp; CTA</h3>
+                    <span class="hint">Leave blank to hide</span>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Popup Title</label>
+                        <input type="text" id="cfg-title" placeholder="e.g. Special Offer!">
+                    </div>
+                    <div class="field">
+                        <label>Popup Subtitle</label>
+                        <input type="text" id="cfg-subtitle" placeholder="e.g. Free service this month">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Button Text</label>
+                        <input type="text" id="cfg-ctaText" placeholder="e.g. Book Now">
+                    </div>
+                    <div class="field">
+                        <label>Button Link</label>
+                        <input type="url" id="cfg-ctaLink" placeholder="https://...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="card">
+                <div class="card-header"><h3>Actions</h3></div>
+                <div class="actions">
+                    <button class="btn btn-green" id="save-btn" onclick="saveSettings()">
+                        <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Save &amp; Publish
+                    </button>
+                    <button class="btn btn-outline" onclick="previewPopup()">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        Preview
+                    </button>
+                    <button class="btn btn-danger" onclick="resetSettings()">
+                        <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+                        Disable &amp; Reset
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Preview overlay -->
+<div id="admin-popup-overlay">
+    <div id="admin-popup-modal">
+        <div class="preview-banner">Preview — not visible to visitors</div>
+        <button id="admin-popup-close" onclick="closePreview()">
+            <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+        </button>
+        <img id="admin-popup-img" src="" alt="Ad Preview">
+        <div id="admin-popup-body">
+            <div id="admin-popup-title"></div>
+            <div id="admin-popup-subtitle"></div>
+            <button id="admin-popup-cta"></button>
+        </div>
+    </div>
+</div>
+
+<div id="toast"><span id="toast-icon">✅</span>&nbsp;<span id="toast-msg">Saved!</span></div>
+
+<!-- ===== STRAPI APP SCRIPT ===== -->
+<script src="./strapi-config.js"></script>
+<script>
+    /* ---- State ---- */
+    let JWT             = sessionStorage.getItem('strapi_jwt') || null;
+    let pendingImageId  = null;
+    let pendingImageUrl = null;
+
+    const FREQ_LABELS = {
+        every_visit:      'Every',
+        once_per_session: 'Per Session',
+        once_per_day:     'Daily'
+    };
+
+    function apiUrl(path) { return window.STRAPI_URL + path; }
+
+    function authHeaders(json) {
+        const h = { Authorization: `Bearer ${JWT}` };
+        if (json) h['Content-Type'] = 'application/json';
+        return h;
+    }
+
+    /* ---- Auth ---- */
+    window.doLogin = async function(e) {
+        e.preventDefault();
+        const btn   = document.getElementById('login-btn');
+        const errEl = document.getElementById('login-error');
+        errEl.style.display = 'none';
+        btn.disabled = true;
+        btn.textContent = 'Signing in…';
+        try {
+            const res = await fetch(apiUrl('/api/auth/local'), {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    identifier: document.getElementById('login-email').value.trim(),
+                    password:   document.getElementById('login-pass').value
+                })
+            });
+            const data = await res.json();
+            if (!res.ok || !data.jwt) throw new Error(data.error?.message || 'Invalid credentials');
+            JWT = data.jwt;
+            sessionStorage.setItem('strapi_jwt', JWT);
+            showDashboard(data.user.email);
+            loadSettings();
+        } catch (err) {
+            errEl.style.display = 'block';
+            const msg = err.message || '';
+            errEl.textContent = (msg.toLowerCase().includes('identifier') || msg.toLowerCase().includes('password'))
+                ? 'Incorrect email or password.'
+                : (msg || 'Sign-in failed. Check your credentials.');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Sign In';
+        }
+    };
+
+    window.doLogout = function() {
+        JWT = null;
+        sessionStorage.removeItem('strapi_jwt');
+        pendingImageId  = null;
+        pendingImageUrl = null;
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('dashboard').classList.remove('visible');
+    };
+
+    function showDashboard(email) {
+        document.getElementById('login-screen').style.display  = 'none';
+        document.getElementById('dashboard').classList.add('visible');
+        document.getElementById('user-email').textContent  = email;
+        document.getElementById('user-avatar').textContent = email[0].toUpperCase();
+    }
+
+    // Auto-login if JWT is still valid in session storage
+    window.addEventListener('DOMContentLoaded', async () => {
+        if (!JWT) return;
+        try {
+            const res = await fetch(apiUrl('/api/users/me'), { headers: authHeaders(false) });
+            if (!res.ok) { JWT = null; sessionStorage.removeItem('strapi_jwt'); return; }
+            const user = await res.json();
+            showDashboard(user.email);
+            loadSettings();
+        } catch {
+            JWT = null;
+            sessionStorage.removeItem('strapi_jwt');
+        }
+    });
+
+    /* ---- Load from Strapi ---- */
+    async function loadSettings() {
+        try {
+            const res = await fetch(apiUrl('/api/popup-ad?populate=adImage'), { headers: authHeaders(false) });
+            if (!res.ok) throw new Error('Load failed: ' + res.status);
+            const json = await res.json();
+            if (json.data) applyConfig(json.data);
+        } catch (err) {
+            toast('⚠️', 'Could not load config from Strapi.');
+            console.warn(err);
+        }
+    }
+
+    function applyConfig(d) {
+        document.getElementById('cfg-enabled').checked    = d.enabled   ?? true;
+        document.getElementById('cfg-delay').value        = d.delay     ?? 3;
+        document.getElementById('cfg-frequency').value    = d.frequency ?? 'every_visit';
+        document.getElementById('cfg-title').value        = d.title     ?? '';
+        document.getElementById('cfg-subtitle').value     = d.subtitle  ?? '';
+        document.getElementById('cfg-ctaText').value      = d.ctaText   ?? '';
+        document.getElementById('cfg-ctaLink').value      = d.ctaLink   ?? '';
+
+        if (d.adImage?.url) {
+            const imgUrl = d.adImage.url.startsWith('http')
+                ? d.adImage.url
+                : window.STRAPI_URL + d.adImage.url;
+            pendingImageId  = d.adImage.id;
+            pendingImageUrl = imgUrl;
+            showPreview(imgUrl, 'Saved Ad');
+        }
+
+        updateBadge();
+        updateTiles(d);
+    }
+
+    function readForm() {
+        return {
+            enabled:    document.getElementById('cfg-enabled').checked,
+            delay:      parseInt(document.getElementById('cfg-delay').value, 10) || 0,
+            frequency:  document.getElementById('cfg-frequency').value,
+            adImageUrl: pendingImageUrl || '',
+            title:      document.getElementById('cfg-title').value.trim(),
+            subtitle:   document.getElementById('cfg-subtitle').value.trim(),
+            ctaText:    document.getElementById('cfg-ctaText').value.trim(),
+            ctaLink:    document.getElementById('cfg-ctaLink').value.trim()
+        };
+    }
+
+    /* ---- Save to Strapi ---- */
+    window.saveSettings = async function() {
+        const btn = document.getElementById('save-btn');
+        btn.disabled = true;
+        btn.textContent = 'Publishing…';
+        try {
+            const form    = readForm();
+            const payload = {
+                data: {
+                    enabled:   form.enabled,
+                    delay:     form.delay,
+                    frequency: form.frequency,
+                    title:     form.title,
+                    subtitle:  form.subtitle,
+                    ctaText:   form.ctaText,
+                    ctaLink:   form.ctaLink
+                }
+            };
+            if (pendingImageId !== null) payload.data.adImage = pendingImageId;
+
+            const res = await fetch(apiUrl('/api/popup-ad'), {
+                method:  'PUT',
+                headers: authHeaders(true),
+                body:    JSON.stringify(payload)
+            });
+            if (!res.ok) throw new Error('Save failed: ' + res.status);
+            updateBadge();
+            updateTiles(form);
+            toast('✅', 'Published! Changes are live on the website.');
+        } catch (err) {
+            console.error(err);
+            toast('❌', 'Save failed. Check Strapi permissions.');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Save & Publish';
+        }
+    };
+
+    window.resetSettings = async function() {
+        if (!confirm('Disable popup and clear all settings?')) return;
+        try {
+            await fetch(apiUrl('/api/popup-ad'), {
+                method:  'PUT',
+                headers: authHeaders(true),
+                body:    JSON.stringify({
+                    data: { enabled: false, adImage: null, title: '', subtitle: '', ctaText: '', ctaLink: '' }
+                })
+            });
+            pendingImageId  = null;
+            pendingImageUrl = null;
+            document.getElementById('img-preview-wrap').style.display = 'none';
+            document.getElementById('cfg-enabled').checked  = false;
+            document.getElementById('cfg-delay').value      = 3;
+            document.getElementById('cfg-frequency').value  = 'every_visit';
+            document.getElementById('cfg-title').value      = '';
+            document.getElementById('cfg-subtitle').value   = '';
+            document.getElementById('cfg-ctaText').value    = '';
+            document.getElementById('cfg-ctaLink').value    = '';
+            updateBadge();
+            updateTiles({ enabled: false, delay: 3, frequency: 'every_visit' });
+            toast('🔄', 'Popup disabled and settings cleared.');
+        } catch {
+            toast('❌', 'Reset failed. Check Strapi permissions.');
+        }
+    };
+
+    /* ---- Image upload (XHR for progress tracking) ---- */
+    window.onFileSelected = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        uploadFile(file);
+    };
+
+    const zone = document.getElementById('upload-zone');
+    zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) uploadFile(file);
+    });
+
+    async function uploadFile(file) {
+        const progressWrap = document.getElementById('progress-wrap');
+        const progressFill = document.getElementById('progress-fill');
+        const progressLbl  = document.getElementById('progress-label');
+
+        progressWrap.style.display = 'block';
+        progressFill.style.width   = '0%';
+        progressLbl.textContent    = 'Uploading…';
+        showPreview(URL.createObjectURL(file), 'Uploading…');
+
+        const formData = new FormData();
+        formData.append('files', file);
+
+        try {
+            await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', apiUrl('/api/upload'));
+                xhr.setRequestHeader('Authorization', `Bearer ${JWT}`);
+
+                xhr.upload.onprogress = ev => {
+                    if (ev.lengthComputable) {
+                        const pct = Math.round((ev.loaded / ev.total) * 100);
+                        progressFill.style.width = pct + '%';
+                        progressLbl.textContent  = `Uploading… ${pct}%`;
+                    }
+                };
+
+                xhr.onload = () => {
+                    progressWrap.style.display = 'none';
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        const result   = JSON.parse(xhr.responseText);
+                        const uploaded = Array.isArray(result) ? result[0] : result;
+                        pendingImageId  = uploaded.id;
+                        pendingImageUrl = uploaded.url.startsWith('http')
+                            ? uploaded.url
+                            : window.STRAPI_URL + uploaded.url;
+                        showPreview(pendingImageUrl, 'New Ad — click Save to publish');
+                        toast('📸', 'Image uploaded! Click "Save & Publish" to go live.');
+                        resolve();
+                    } else {
+                        reject(new Error('Upload HTTP ' + xhr.status));
+                    }
+                };
+                xhr.onerror = () => { progressWrap.style.display = 'none'; reject(new Error('Network error')); };
+                xhr.send(formData);
+            });
+        } catch (err) {
+            progressWrap.style.display = 'none';
+            toast('❌', 'Upload failed. Check Strapi media permissions.');
+            console.error(err);
+        }
+    }
+
+    function showPreview(src, label) {
+        document.getElementById('img-preview').src                = src;
+        document.getElementById('preview-badge').textContent       = label;
+        document.getElementById('img-preview-wrap').style.display = 'block';
+    }
+
+    /* ---- Preview popup ---- */
+    window.previewPopup = function() {
+        const cfg      = readForm();
+        const img      = document.getElementById('admin-popup-img');
+        const title    = document.getElementById('admin-popup-title');
+        const subtitle = document.getElementById('admin-popup-subtitle');
+        const cta      = document.getElementById('admin-popup-cta');
+        const body     = document.getElementById('admin-popup-body');
+
+        img.src = cfg.adImageUrl || '';
+        img.style.display = cfg.adImageUrl ? 'block' : 'none';
+
+        title.textContent    = cfg.title;
+        subtitle.textContent = cfg.subtitle;
+        cta.textContent      = cfg.ctaText;
+        cta.onclick          = () => cfg.ctaLink && window.open(cfg.ctaLink, '_blank');
+
+        title.style.display    = cfg.title    ? 'block' : 'none';
+        subtitle.style.display = cfg.subtitle ? 'block' : 'none';
+        cta.style.display      = (cfg.ctaText && cfg.ctaLink) ? 'block' : 'none';
+        body.style.display     = (cfg.title || cfg.subtitle || (cfg.ctaText && cfg.ctaLink)) ? 'block' : 'none';
+
+        document.getElementById('admin-popup-overlay').classList.add('visible');
+    };
+
+    window.closePreview = function() {
+        document.getElementById('admin-popup-overlay').classList.remove('visible');
+    };
+
+    document.getElementById('admin-popup-overlay').addEventListener('click', function(e) {
+        if (e.target === this) window.closePreview();
+    });
+
+    /* ---- UI helpers ---- */
+    window.updateBadge = function() {
+        const on = document.getElementById('cfg-enabled').checked;
+        document.getElementById('status-badge-wrap').innerHTML = on
+            ? '<span class="status-badge on"><span class="status-dot"></span>Active</span>'
+            : '<span class="status-badge off"><span class="status-dot"></span>Disabled</span>';
+    };
+
+    function updateTiles(cfg) {
+        document.getElementById('tile-status').textContent = cfg.enabled ? 'ON' : 'OFF';
+        document.getElementById('tile-delay').textContent  = (cfg.delay ?? '—') + 's';
+        document.getElementById('tile-freq').textContent   = FREQ_LABELS[cfg.frequency] || '—';
+    }
+
+    let toastTimer;
+    function toast(icon, msg) {
+        document.getElementById('toast-icon').textContent = icon;
+        document.getElementById('toast-msg').textContent  = msg;
+        const el = document.getElementById('toast');
+        el.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+    }
+</script>
+</body>
+</html>

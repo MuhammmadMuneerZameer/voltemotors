@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SuperVolt EV Service Center - Expert electric scooter & bike service in Pune. Fast repairs, genuine parts, expert technicians.">
+    <meta name="keywords" content="EV service, electric scooter repair, electric bike service, Pune, SuperVolt, battery service, OLA, Ather, TVS, Bajaj">
+    <title>SuperVolt EV Service Center – Premium EV Service in Pune</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & ROOT ===== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --bg:        #080808;
+            --bg2:       #101010;
+            --bg3:       #161616;
+            --card:      rgba(255,255,255,0.04);
+            --accent:    #00b848;
+            --accent2:   #00e05a;
+            --glow:      rgba(0,184,72,0.25);
+            --glow-lg:   rgba(0,184,72,0.12);
+            --text:      #f0f0f0;
+            --text2:     #999;
+            --border:    rgba(255,255,255,0.07);
+            --border-a:  rgba(0,184,72,0.35);
+            --radius:    14px;
+            --header-h:  78px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        h1,h2,h3,h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em; }
+
+        a { text-decoration: none; color: inherit; }
+
+        img { display: block; max-width: 100%; }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--header-h);
+            z-index: 1000;
+            background: rgba(8,8,8,0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        header.scrolled {
+            background: rgba(8,8,8,0.97);
+            box-shadow: 0 1px 32px rgba(0,0,0,0.5);
+        }
+
+        /* 3-column grid: logo | nav | actions */
+        .header-inner {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Logo — left column */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 38px; height: 38px;
+            background: var(--accent);
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .logo:hover .logo-icon { transform: rotate(-6deg) scale(1.05); }
+        .logo-icon svg { width: 20px; height: 20px; fill: #000; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+        .logo-name {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--text);
+            font-size: 1.45rem;
+            letter-spacing: 0.06em;
+        }
+        .logo-sub {
+            color: var(--accent);
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Nav — center column, truly centered */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        nav a {
+            font-size: 0.825rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.6);
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: color 0.2s, background 0.2s;
+            position: relative;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--text);
+            background: rgba(255,255,255,0.06);
+        }
+        nav a.active {
+            color: var(--accent);
+            background: rgba(0,184,72,0.1);
+        }
+
+        /* Header right — right column, end-aligned */
+        .header-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .lang-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            padding: 5px 11px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            color: rgba(255,255,255,0.45);
+            border: none;
+            transition: all 0.2s;
+            letter-spacing: 0.04em;
+        }
+        .lang-btn.active { background: var(--accent); color: #000; }
+
+        .btn-cta {
+            background: var(--accent);
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 9px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+        }
+        .btn-cta:hover { background: var(--accent2); box-shadow: 0 0 16px var(--glow); }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile nav */
+        .mobile-nav {
+            position: fixed;
+            top: var(--header-h); left: 0; right: 0;
+            background: rgba(8,8,8,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px 24px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 2px;
+            transform: translateY(-8px);
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .mobile-nav.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .mobile-nav a {
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text2);
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+        .mobile-nav .mobile-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 10px 0;
+        }
+        .mobile-nav .mobile-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px 0;
+            gap: 10px;
+        }
+        .mobile-nav .mobile-lang {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .mobile-nav .mobile-lang button {
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            color: rgba(255,255,255,0.45);
+            border: none;
+            transition: all 0.2s;
+        }
+        .mobile-nav .mobile-lang button.active { background: var(--accent); color: #000; }
+        .mobile-nav .mobile-cta {
+            flex: 1;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Hamburger → X animation */
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 640px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Video background — 3 panels */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        .hero-vid-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+        .hero-vid-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(8,8,8,0.55);
+        }
+        .hero-vid-wrap video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, rgba(8,8,8,0.92) 38%, rgba(8,8,8,0.5) 65%, rgba(8,8,8,0.25) 100%);
+        }
+        .hero-overlay-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 180px;
+            background: linear-gradient(to top, var(--bg), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            padding-top: 40px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,184,72,0.12);
+            border: 1px solid var(--border-a);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+        .hero-badge { white-space: nowrap; }
+        .hero-badge .dot { display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: blink 1.2s infinite; flex-shrink: 0; }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 5.5vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--text2);
+            font-style: italic;
+            border-left: 3px solid var(--accent);
+            padding-left: 16px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text2);
+            margin-bottom: 32px;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 13px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        }
+        .btn-primary:hover {
+            background: var(--accent2);
+            box-shadow: 0 0 24px var(--glow);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s, transform 0.15s;
+        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* Stat badges */
+        .hero-stats {
+            position: absolute;
+            right: 0; top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-right: 40px;
+        }
+        .stat-badge {
+            background: rgba(8,8,8,0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-a);
+            border-radius: 12px;
+            padding: 14px 20px;
+            text-align: center;
+            min-width: 140px;
+            animation: fadeSlideIn 0.6s ease both;
+        }
+        .stat-badge:nth-child(2) { animation-delay: 0.15s; }
+        .stat-badge:nth-child(3) { animation-delay: 0.3s; }
+        .stat-badge:nth-child(4) { animation-delay: 0.45s; }
+        .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        /* Scroll cue */
+        .scroll-cue {
+            position: absolute;
+            bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text2);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .scroll-cue .mouse {
+            width: 22px; height: 34px;
+            border: 2px solid var(--border-a);
+            border-radius: 11px;
+            display: flex;
+            justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-cue .wheel {
+            width: 3px; height: 7px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: scrollWheel 1.4s infinite;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 100px 0;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            color: var(--text);
+            line-height: 1.05;
+            margin-bottom: 14px;
+        }
+        .section-title span { color: var(--accent); }
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text2);
+            max-width: 560px;
+            line-height: 1.7;
+            margin-bottom: 56px;
+        }
+        .section-header { text-align: center; }
+        .section-header .section-subtitle { margin-left: auto; margin-right: auto; }
+
+        /* Divider line */
+        .divider {
+            width: 48px; height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin-bottom: 14px;
+        }
+        .section-header .divider { margin-left: auto; margin-right: auto; }
+
+        /* ===== SERVICES ===== */
+        .services-section { background: var(--bg2); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .service-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s;
+        }
+        .service-card:hover { border-color: var(--border-a); transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--border-a); }
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .svc-icon {
+            width: 52px; height: 52px;
+            background: var(--glow-lg);
+            border: 1px solid var(--border-a);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+        }
+        .svc-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .service-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .service-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; margin-bottom: 20px; }
+        .svc-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            transition: gap 0.2s;
+        }
+        .service-card:hover .svc-arrow { gap: 10px; }
+        .svc-arrow svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Card stagger */
+        .service-card:nth-child(1) { animation: fadeInUp 0.5s 0.1s both; }
+        .service-card:nth-child(2) { animation: fadeInUp 0.5s 0.2s both; }
+        .service-card:nth-child(3) { animation: fadeInUp 0.5s 0.3s both; }
+        .service-card:nth-child(4) { animation: fadeInUp 0.5s 0.4s both; }
+        .service-card:nth-child(5) { animation: fadeInUp 0.5s 0.5s both; }
+        .service-card:nth-child(6) { animation: fadeInUp 0.5s 0.6s both; }
+
+        /* ===== GALLERY ===== */
+        .gallery-section { background: var(--bg); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.07); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text);
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        .why-section { background: var(--bg2); }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .why-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .why-card:hover { border-color: var(--border-a); box-shadow: 0 8px 32px var(--glow-lg); }
+        .why-num {
+            position: absolute;
+            top: -10px; right: 16px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: rgba(0,184,72,0.06);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+        .why-icon {
+            width: 48px; height: 48px;
+            background: var(--glow-lg);
+            border: 1px solid var(--border-a);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+        }
+        .why-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .why-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .why-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; }
+
+        /* ===== TESTIMONIALS ===== */
+        .reviews-section { background: var(--bg); }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .review-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .review-card:hover { border-color: var(--border-a); transform: translateY(-4px); }
+        .quote-mark {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: var(--accent);
+            line-height: 0.7;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+        .stars {
+            color: #f5a623;
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            font-size: 0.9rem;
+            color: var(--text2);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .review-divider {
+            width: 32px; height: 2px;
+            background: var(--accent);
+            margin-bottom: 14px;
+            border-radius: 2px;
+        }
+        .review-author {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .review-role {
+            font-size: 0.78rem;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+        /* ===== BRANDS ===== */
+        .brands-section { background: var(--bg2); overflow: hidden; }
+        .brands-track-wrap {
+            overflow: hidden;
+            position: relative;
+            padding: 8px 0;
+        }
+        .brands-track-wrap::before, .brands-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 120px;
+            z-index: 1;
+        }
+        .brands-track-wrap::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+        .brands-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+        .brands-track {
+            display: flex;
+            gap: 0;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        .brands-track:hover { animation-play-state: paused; }
+        .brand-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 160px;
+            padding: 16px 32px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 0 10px;
+            background: var(--card);
+            transition: border-color 0.2s;
+        }
+        .brand-item:hover { border-color: var(--border-a); }
+        .brand-item img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: 0.55; transition: opacity 0.2s; }
+        .brand-item:hover img { opacity: 0.9; }
+        .brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text2);
+            letter-spacing: 0.08em;
+        }
+        .brands-disclaimer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.25);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section { background: var(--bg); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        /* Contact info */
+        .contact-info-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .ci-icon {
+            width: 44px; height: 44px;
+            background: var(--glow-lg);
+            border: 1px solid var(--border-a);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .ci-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .ci-body h4 { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+        .ci-body p, .ci-body a { font-size: 0.9rem; color: var(--text2); display: block; transition: color 0.2s; }
+        .ci-body a:hover { color: var(--accent); }
+
+        /* Map */
+        .map-wrap {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 32px;
+        }
+        .map-wrap iframe { display: block; width: 100%; height: 280px; }
+
+        /* Contact form */
+        .contact-form-wrap {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+        }
+        .contact-form-wrap h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+        .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.08em; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+        .form-group select { appearance: none; }
+        .form-group select option { background: var(--bg3); }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+        .form-submit { width: 100%; }
+        .form-msg {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            margin-bottom: 14px;
+            display: none;
+        }
+        .form-success { background: rgba(0,184,72,0.1); border: 1px solid rgba(0,184,72,0.3); color: #00d455; }
+        .form-error   { background: rgba(255,60,60,0.1); border: 1px solid rgba(255,60,60,0.3); color: #ff6b6b; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            padding-bottom: 48px;
+        }
+        .footer-col h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+            letter-spacing: 0.08em;
+            margin-bottom: 20px;
+        }
+        .footer-col p {
+            font-size: 0.875rem;
+            color: var(--text2);
+            line-height: 1.7;
+        }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col ul li a {
+            font-size: 0.875rem;
+            color: var(--text2);
+            transition: color 0.2s;
+        }
+        .footer-col ul li a:hover { color: var(--accent); }
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .social-link {
+            width: 36px; height: 36px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .social-link:hover { border-color: var(--accent); background: var(--glow-lg); }
+        .social-link svg { width: 16px; height: 16px; stroke: var(--text2); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+        .social-link:hover svg { stroke: var(--accent); }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+        }
+        .footer-bottom a { color: var(--accent); opacity: 0.7; }
+
+        /* ===== POPUP AD ===== */
+        #popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        #popup-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #popup-modal {
+            background: var(--bg2);
+            border: 1px solid var(--border-a);
+            border-radius: 18px;
+            overflow: hidden;
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px var(--border-a);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        #popup-overlay.visible #popup-modal {
+            transform: scale(1) translateY(0);
+        }
+        #popup-close {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 34px; height: 34px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        #popup-close:hover { background: rgba(255,60,60,0.25); border-color: rgba(255,60,60,0.5); }
+        #popup-close svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2.5; stroke-linecap: round; }
+        #popup-img-wrap { position: relative; }
+        #popup-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        #popup-body {
+            padding: 24px 28px;
+        }
+        #popup-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 8px;
+            display: none;
+        }
+        #popup-subtitle {
+            font-size: 0.9rem;
+            color: var(--text2);
+            margin-bottom: 16px;
+            display: none;
+        }
+        #popup-cta {
+            display: none;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        #popup-cta:hover { background: var(--accent2); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scrollWheel {
+            0%  { transform: translateY(0); opacity: 1; }
+            80% { transform: translateY(8px); opacity: 0; }
+            81% { transform: translateY(0); opacity: 0; }
+            100%{ opacity: 1; }
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes charge {
+            0%,100% { width: 40%; }
+            50% { width: 95%; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .services-grid  { grid-template-columns: repeat(2, 1fr); }
+            .why-grid       { grid-template-columns: repeat(2, 1fr); }
+            .reviews-grid   { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid    { grid-template-columns: 1fr 1fr; gap: 28px; }
+            .hero-stats     { display: none; }
+            .contact-grid   { gap: 32px; }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            :root { --header-h: 68px; }
+
+            /* Header: only logo + hamburger */
+            .header-inner   { grid-template-columns: 1fr auto; }
+            nav             { display: none; }
+            .lang-toggle    { display: none; }
+            .btn-cta        { display: none; }
+            .hamburger      { display: flex; }
+
+            /* Hero */
+            .hero           { min-height: 100svh; min-height: 100vh; }
+            .hero-content   { max-width: 100%; padding-top: 0; }
+            .hero h1        { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.08; }
+            .hero-badge     { font-size: 0.68rem; padding: 5px 12px; }
+            .hero-tagline   { font-size: 0.875rem; }
+            .hero-desc      { font-size: 0.875rem; }
+            .hero-actions   { flex-direction: column; gap: 10px; }
+            .hero-actions .btn-primary,
+            .hero-actions .btn-outline { width: 100%; justify-content: center; }
+            .scroll-cue     { display: none; }
+
+            /* Sections */
+            .section        { padding: 60px 0; }
+            .section-title  { font-size: 1.9rem; }
+            .section-subtitle { font-size: 0.875rem; margin-bottom: 32px; }
+            .section-header { margin-bottom: 32px !important; }
+
+            /* Grids → single column */
+            .services-grid  { grid-template-columns: 1fr; gap: 14px; }
+            .gallery-grid   { grid-template-columns: 1fr; gap: 12px; }
+            .why-grid       { grid-template-columns: 1fr; gap: 14px; }
+            .reviews-grid   { grid-template-columns: 1fr; gap: 14px; }
+            .contact-grid   { grid-template-columns: 1fr; gap: 32px; }
+            .footer-grid    { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .form-row       { grid-template-columns: 1fr; }
+
+            /* Cards */
+            .service-card   { padding: 24px 20px; }
+            .why-card       { padding: 24px 20px; }
+            .review-card    { padding: 24px 20px; }
+
+            /* Contact */
+            .contact-form-wrap { padding: 24px 18px; }
+            .map-wrap iframe   { height: 220px; }
+
+            /* Footer */
+            .footer-bottom  { font-size: 0.75rem; }
+
+            /* Popup */
+            #popup-modal    { max-width: 95vw; border-radius: 14px; }
+            #popup-overlay  { padding: 12px; align-items: flex-end; padding-bottom: 24px; }
+            #popup-modal    { border-radius: 16px 16px 14px 14px; }
+        }
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .container      { padding: 0 16px; }
+            .footer-grid    { grid-template-columns: 1fr; gap: 28px; }
+            .hero h1        { font-size: clamp(1.9rem, 8.5vw, 2.4rem); }
+            .stat-tile .val { font-size: 1.6rem; }
+            .footer-social  { gap: 8px; }
+            .contact-form-wrap h3 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== POPUP AD OVERLAY ===== -->
+<div id="popup-overlay" role="dialog" aria-modal="true">
+    <div id="popup-modal">
+        <button id="popup-close" aria-label="Close advertisement">
+            <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+        </button>
+        <div id="popup-img-wrap">
+            <img id="popup-img" src="" alt="Special Offer from SuperVolt EV">
+        </div>
+        <div id="popup-body">
+            <div id="popup-title"></div>
+            <div id="popup-subtitle"></div>
+            <button id="popup-cta"></button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="#" onclick="scrollToHome(event)" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">SUPERVOLT</span>
+                    <span class="logo-sub" data-en="Electric Motors" data-mr="इलेक्ट्रिक मोटर्स">Electric Motors</span>
+                </div>
+            </a>
+
+            <nav>
+                <a href="#" onclick="scrollToHome(event)" data-en="Home" data-mr="होम">Home</a>
+                <a href="#services" data-en="Services" data-mr="सेवाएं">Services</a>
+                <a href="#gallery" data-en="Gallery" data-mr="गैलरी">Gallery</a>
+                <a href="#brands" data-en="Brands" data-mr="ब्रांड्स">Brands</a>
+                <a href="#about" data-en="About" data-mr="हमारे बारे में">About</a>
+                <a href="#contact" data-en="Contact" data-mr="संपर्क">Contact</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('mr')">मराठी</button>
+                </div>
+                <button class="btn-cta" onclick="scrollToContact()" data-en="Get Service" data-mr="सेवा प्राप्त करें">Get Service</button>
+                <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+    <a href="#"          onclick="scrollToHome(event);closeMenu()" data-en="Home"    data-mr="होम">Home</a>
+    <a href="#services"  onclick="closeMenu()" data-en="Services"  data-mr="सेवाएं">Services</a>
+    <a href="#gallery"   onclick="closeMenu()" data-en="Gallery"   data-mr="गैलरी">Gallery</a>
+    <a href="#brands"    onclick="closeMenu()" data-en="Brands"    data-mr="ब्रांड्स">Brands</a>
+    <a href="#about"     onclick="closeMenu()" data-en="About"     data-mr="हमारे बारे में">About</a>
+    <a href="#contact"   onclick="closeMenu()" data-en="Contact"   data-mr="संपर्क">Contact</a>
+    <div class="mobile-divider"></div>
+    <div class="mobile-actions">
+        <div class="mobile-lang">
+            <button id="mob-lang-en" class="active" onclick="setLanguage('en');syncMobileLang('en')">EN</button>
+            <button id="mob-lang-mr"                onclick="setLanguage('mr');syncMobileLang('mr')">मराठी</button>
+        </div>
+        <button class="mobile-cta" onclick="scrollToContact();closeMenu()" data-en="Get Service" data-mr="सेवा प्राप्त करें">Get Service</button>
+    </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <!-- 3-panel video background -->
+    <div class="hero-bg">
+        <div class="hero-vid-wrap"><video id="heroVideo1" autoplay muted playsinline loop preload="none"></video></div>
+        <div class="hero-vid-wrap"><video id="heroVideo2" autoplay muted playsinline loop preload="none"></video></div>
+        <div class="hero-vid-wrap"><video id="heroVideo3" autoplay muted playsinline loop preload="none"></video></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay-bottom"></div>
+
+    <div class="container" style="position:relative;z-index:2;width:100%;">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-en="⚡ Pune's #1 EV Service Center" data-mr="⚡ पुण्यातील #1 EV सेवा केंद्र">⚡ Pune's #1 EV Service Center</span>
+            </div>
+
+            <h1 data-en="Pune's Most Trusted<br><em>EV Service</em> Center"
+                data-mr="पुण्यातील सर्वात<br>विश्वासू <em>EV सेवा</em> केंद्र">
+                Pune's Most Trusted<br><em>EV Service</em> Center
+            </h1>
+
+            <p class="hero-tagline"
+               data-en="&ldquo;Charged Up. Tuned Right. Back on the Road — Fast.&rdquo;"
+               data-mr="&ldquo;चार्ज झाले. योग्य ट्यून केले. रस्त्यावर परत — झटपट.&rdquo;">
+               &ldquo;Charged Up. Tuned Right. Back on the Road — Fast.&rdquo;
+            </p>
+
+            <p class="hero-desc"
+               data-en="Expert care for OLA, Ather, TVS, Bajaj &amp; all major EV brands. Fast repairs, genuine parts, and technicians you can trust."
+               data-mr="OLA, Ather, TVS, Bajaj आणि सर्व प्रमुख EV ब्रांडसाठी विशेषज्ञ सेवा. तेज मरम्मत, खरे पार्ट्स आणि विश्वासू तंत्रज्ञ.">
+               Expert care for OLA, Ather, TVS, Bajaj &amp; all major EV brands. Fast repairs, genuine parts, and technicians you can trust.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="scrollToContact()"
+                    data-en="Book a Service" data-mr="सेवा बुक करा">Book a Service</button>
+                <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"
+                    data-en="Explore Services" data-mr="सेवा पहा">Explore Services</button>
+            </div>
+        </div>
+
+        <!-- Floating stat badges -->
+        <div class="hero-stats">
+            <div class="stat-badge">
+                <div class="stat-num">500+</div>
+                <div class="stat-label" data-en="EVs Serviced" data-mr="EVs सर्व्हिस">EVs Serviced</div>
+            </div>
+            <div class="stat-badge">
+                <div class="stat-num">5★</div>
+                <div class="stat-label" data-en="Avg Rating" data-mr="सरासरी रेटिंग">Avg Rating</div>
+            </div>
+            <div class="stat-badge">
+                <div class="stat-num">8+</div>
+                <div class="stat-label" data-en="EV Brands" data-mr="EV ब्रांड">EV Brands</div>
+            </div>
+            <div class="stat-badge">
+                <div class="stat-num">1 Day</div>
+                <div class="stat-label" data-en="Turnaround" data-mr="टर्नअराउंड">Turnaround</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-cue">
+        <div class="mouse"><div class="wheel"></div></div>
+        <span data-en="SCROLL" data-mr="स्क्रोल">SCROLL</span>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="section services-section" id="services">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-label" data-en="What We Do" data-mr="हम क्या करते हैं">What We Do</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Our <span>Services</span>" data-mr="हमारी <span>सेवाएं</span>">Our <span>Services</span></h2>
+            <p class="section-subtitle" data-en="Comprehensive care for every electric vehicle — from routine maintenance to advanced diagnostics." data-mr="हर इलेक्ट्रिक वाहन के लिए व्यापक देखभाल — नियमित रखरखाव से लेकर उन्नत निदान तक।">Comprehensive care for every electric vehicle — from routine maintenance to advanced diagnostics.</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- General Service -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h3 data-en="General Service" data-mr="सामान्य सेवा">General Service</h3>
+                <p data-en="Complete inspection and maintenance of your electric vehicle" data-mr="आपके इलेक्ट्रिक वाहन का पूर्ण निरीक्षण और रखरखाव">Complete inspection and maintenance of your electric vehicle</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+
+            <!-- Motor Service -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                </div>
+                <h3 data-en="Motor Service" data-mr="मोटर सेवा">Motor Service</h3>
+                <p data-en="Expert motor diagnosis, repair, and performance optimization" data-mr="विशेषज्ञ मोटर निदान, मरम्मत और प्रदर्शन अनुकूलन">Expert motor diagnosis, repair, and performance optimization</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+
+            <!-- Battery Service -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M7 11v2M11 11v2"/></svg>
+                </div>
+                <h3 data-en="Battery Service" data-mr="बैटरी सेवा">Battery Service</h3>
+                <p data-en="Battery diagnosis, maintenance, and replacement services" data-mr="बैटरी निदान, रखरखाव और प्रतिस्थापन सेवाएं">Battery diagnosis, maintenance, and replacement services</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+
+            <!-- Controller Diagnosis -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+                </div>
+                <h3 data-en="Controller Diagnosis" data-mr="नियंत्रक निदान">Controller Diagnosis</h3>
+                <p data-en="Advanced controller inspection and repair services" data-mr="उन्नत नियंत्रक निरीक्षण और मरम्मत सेवाएं">Advanced controller inspection and repair services</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+
+            <!-- Brake Service -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M12 2a10 10 0 0 1 7.07 17.07"/></svg>
+                </div>
+                <h3 data-en="Brake Service" data-mr="ब्रेक सेवा">Brake Service</h3>
+                <p data-en="Safety-first brake inspection and maintenance" data-mr="सुरक्षा-प्रथम ब्रेक निरीक्षण और रखरखाव">Safety-first brake inspection and maintenance</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+
+            <!-- Performance Upgrade -->
+            <div class="service-card">
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <h3 data-en="Performance Upgrade" data-mr="प्रदर्शन अपग्रेड">Performance Upgrade</h3>
+                <p data-en="Enhance speed and efficiency of your electric vehicle" data-mr="आपके इलेक्ट्रिक वाहन की गति और दक्षता बढ़ाएं">Enhance speed and efficiency of your electric vehicle</p>
+                <span class="svc-arrow" data-en="Learn More" data-mr="अधिक जानें">Learn More
+                    <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="section gallery-section" id="gallery">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:48px">
+            <p class="section-label" data-en="Our Workshop" data-mr="हमारी वर्कशॉप">Our Workshop</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Our Work <span>In Action</span>" data-mr="हमारा काम <span>एक्शन में</span>">Our Work <span>In Action</span></h2>
+            <p class="section-subtitle" data-en="Take a look inside our state-of-the-art EV service facility in Pune." data-mr="पुण्यातील आमच्या अत्याधुनिक EV सेवा सुविधेमध्ये एक नजर टाका.">Take a look inside our state-of-the-art EV service facility in Pune.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/IMG_8400.JPG.jpeg" alt="SuperVolt EV Workshop" loading="lazy">
+                <div class="gallery-overlay"><span data-en="EV Workshop Bay" data-mr="EV वर्कशॉप बे">EV Workshop Bay</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_8552.JPG.jpeg" alt="SuperVolt EV Technician" loading="lazy">
+                <div class="gallery-overlay"><span data-en="Expert Technicians" data-mr="विशेषज्ञ तकनीशियन">Expert Technicians</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_8672.PNG" alt="SuperVolt EV Parts" loading="lazy">
+                <div class="gallery-overlay"><span data-en="Genuine EV Parts" data-mr="असली EV पार्ट्स">Genuine EV Parts</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_8673.PNG" alt="SuperVolt EV Service" loading="lazy">
+                <div class="gallery-overlay"><span data-en="Premium Service" data-mr="प्रीमियम सेवा">Premium Service</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="section why-section" id="about">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:56px">
+            <p class="section-label" data-en="The SuperVolt Difference" data-mr="सुपरवोल्ट का अंतर">The SuperVolt Difference</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Why Choose <span>SuperVolt</span>" data-mr="सुपरवोल्ट क्यों <span>चुनें</span>">Why Choose <span>SuperVolt</span></h2>
+            <p class="section-subtitle" data-en="We're not just a service center — we're your EV partner for the long run." data-mr="हम सिर्फ एक सेवा केंद्र नहीं हैं — हम लंबे समय के लिए आपके EV पार्टनर हैं।">We're not just a service center — we're your EV partner for the long run.</p>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <span class="why-num">01</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <h3 data-en="Expert Technicians" data-mr="विशेषज्ञ तकनीशियन">Expert Technicians</h3>
+                <p data-en="Trained and certified professionals with years of EV experience" data-mr="वर्षों के EV अनुभव के साथ प्रशिक्षित और प्रमाणित पेशेवर">Trained and certified professionals with years of EV experience</p>
+            </div>
+
+            <div class="why-card">
+                <span class="why-num">02</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <h3 data-en="Genuine Parts" data-mr="असली पार्ट्स">Genuine Parts</h3>
+                <p data-en="Only authentic OEM components used in all our repairs and upgrades" data-mr="सभी मरम्मत और अपग्रेड में केवल प्रामाणिक OEM घटक का उपयोग">Only authentic OEM components used in all our repairs and upgrades</p>
+            </div>
+
+            <div class="why-card">
+                <span class="why-num">03</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <h3 data-en="Quick Service" data-mr="तेज़ सेवा">Quick Service</h3>
+                <p data-en="Fast turnaround time without ever compromising on quality" data-mr="गुणवत्ता में कोई समझौता किए बिना तेज़ टर्नअराउंड समय">Fast turnaround time without ever compromising on quality</p>
+            </div>
+
+            <div class="why-card">
+                <span class="why-num">04</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                <h3 data-en="Transparent Pricing" data-mr="पारदर्शी मूल्य निर्धारण">Transparent Pricing</h3>
+                <p data-en="Clear, upfront pricing with zero hidden charges — ever" data-mr="स्पष्ट, अग्रिम मूल्य निर्धारण — कोई भी छिपा हुआ शुल्क नहीं">Clear, upfront pricing with zero hidden charges — ever</p>
+            </div>
+
+            <div class="why-card">
+                <span class="why-num">05</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></svg></div>
+                <h3 data-en="All Major Brands" data-mr="सभी ब्रांड">All Major Brands</h3>
+                <p data-en="Service for OLA, Ather, TVS, Bajaj, Hero, Ampere and more" data-mr="OLA, Ather, TVS, Bajaj, Hero, Ampere और अन्य के लिए सेवा">Service for OLA, Ather, TVS, Bajaj, Hero, Ampere and more</p>
+            </div>
+
+            <div class="why-card">
+                <span class="why-num">06</span>
+                <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></div>
+                <h3 data-en="Customer Support" data-mr="ग्राहक सहायता">Customer Support</h3>
+                <p data-en="Always available for emergencies and queries — 7 days a week" data-mr="आपातकालीन स्थितियों और प्रश्नों के लिए सदैव उपलब्ध — सप्ताह में 7 दिन">Always available for emergencies and queries — 7 days a week</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section reviews-section" id="reviews">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:52px">
+            <p class="section-label" data-en="What Our Customers Say" data-mr="हमारे ग्राहक क्या कहते हैं">What Our Customers Say</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Customer <span>Reviews</span>" data-mr="ग्राहक <span>समीक्षा</span>">Customer <span>Reviews</span></h2>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="review-text" data-en="Excellent service! The team is professional and knowledgeable. My bike runs like new." data-mr="उत्कृष्ट सेवा! टीम पेशेवर और जानकार है। मेरी बाइक नई जैसी चल रही है।">Excellent service! The team is professional and knowledgeable. My bike runs like new.</p>
+                <div class="review-divider"></div>
+                <div class="review-author" data-en="Rajesh Kumar" data-mr="राजेश कुमार">Rajesh Kumar</div>
+                <div class="review-role" data-en="OLA Scooter Owner" data-mr="OLA स्कूटर मालिक">OLA Scooter Owner</div>
+            </div>
+            <div class="review-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="review-text" data-en="Outstanding battery service. Quick turnaround and transparent pricing. Highly recommended!" data-mr="शानदार बैटरी सेवा। तेज़ सेवा और पारदर्शी मूल्य। अत्यंत अनुशंसित!">Outstanding battery service. Quick turnaround and transparent pricing. Highly recommended!</p>
+                <div class="review-divider"></div>
+                <div class="review-author" data-en="Priya Sharma" data-mr="प्रिया शर्मा">Priya Sharma</div>
+                <div class="review-role" data-en="Ather Scooter Owner" data-mr="Ather स्कूटर मालिक">Ather Scooter Owner</div>
+            </div>
+            <div class="review-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="review-text" data-en="Best EV service center in Pune! Expert technicians and genuine parts. Worth every penny." data-mr="पुणे में सर्वश्रेष्ठ EV सेवा केंद्र! विशेषज्ञ तकनीशियन और असली पार्ट्स। हर रुपये के लायक।">Best EV service center in Pune! Expert technicians and genuine parts. Worth every penny.</p>
+                <div class="review-divider"></div>
+                <div class="review-author" data-en="Amit Patel" data-mr="अमित पटेल">Amit Patel</div>
+                <div class="review-role" data-en="TVS EV Owner" data-mr="TVS EV मालिक">TVS EV Owner</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BRANDS ===== -->
+<section class="section brands-section" id="brands">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:52px">
+            <p class="section-label" data-en="Brands We Service" data-mr="हम जिन ब्रांड्स की सेवा करते हैं">Brands We Service</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Brands We <span>Service</span>" data-mr="हम <span>सेवा</span> करते हैं">Brands We <span>Service</span></h2>
+            <p class="section-subtitle" data-en="We proudly service all major electric vehicle brands with expert care and genuine parts." data-mr="हम सभी प्रमुख इलेक्ट्रिक वाहन ब्रांडों की विशेषज्ञ सेवा प्रदान करते हैं।">We proudly service all major electric vehicle brands with expert care and genuine parts.</p>
+        </div>
+    </div>
+
+    <div class="brands-track-wrap">
+        <div class="brands-track">
+            <!-- Set 1 -->
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ola-mobility.svg" alt="OLA" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">OLA</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ather-energy.svg" alt="Ather" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">ATHER</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/tvs-motor-company.svg" alt="TVS" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">TVS</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/bajaj-auto.svg" alt="Bajaj" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">BAJAJ</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ampere-vehicles.svg" alt="Ampere" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">AMPERE</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/hero-electric.svg" alt="Hero" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">HERO</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/pure-ev.svg" alt="Pure EV" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">PURE EV</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/okinawa-autotech.svg" alt="Okinawa" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">OKINAWA</span></div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ola-mobility.svg" alt="OLA" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">OLA</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ather-energy.svg" alt="Ather" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">ATHER</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/tvs-motor-company.svg" alt="TVS" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">TVS</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/bajaj-auto.svg" alt="Bajaj" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">BAJAJ</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/ampere-vehicles.svg" alt="Ampere" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">AMPERE</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/hero-electric.svg" alt="Hero" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">HERO</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/pure-ev.svg" alt="Pure EV" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">PURE EV</span></div>
+            <div class="brand-item"><img src="https://cdn.worldvectorlogo.com/logos/okinawa-autotech.svg" alt="Okinawa" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-name" style="display:none">OKINAWA</span></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <p class="brands-disclaimer" data-en="Logos are trademarks of their respective owners. SuperVolt is not officially affiliated with any brand. Logos are used for identification purposes only." data-mr="लोगो उनके संबंधित मालिकों के ट्रेडमार्क हैं। SuperVolt किसी भी ब्रांड के साथ आधिकारिक रूप से संबंधित नहीं है।">Logos are trademarks of their respective owners. SuperVolt is not officially affiliated with any brand. Logos are used for identification purposes only.</p>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact-section" id="contact">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:52px">
+            <p class="section-label" data-en="Reach Us" data-mr="हम तक पहुंचें">Reach Us</p>
+            <div class="divider"></div>
+            <h2 class="section-title" data-en="Get in <span>Touch</span>" data-mr="हमसे <span>संपर्क करें</span>">Get in <span>Touch</span></h2>
+            <p class="section-subtitle" data-en="Book a service, ask a question, or just say hello — we're always here." data-mr="सेवा बुक करें, प्रश्न पूछें, या बस नमस्ते कहें — हम हमेशा यहाँ हैं।">Book a service, ask a question, or just say hello — we're always here.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Info -->
+            <div>
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16z"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="Phone" data-mr="फोन">Phone</h4>
+                            <a href="tel:+917972792916">+91 7972792916</a>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="WhatsApp" data-mr="WhatsApp">WhatsApp</h4>
+                            <a href="https://wa.me/917972792916" target="_blank" rel="noopener">Message us on WhatsApp</a>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="Location" data-mr="स्थान">Location</h4>
+                            <p data-en="Shop No 10, SN 34/10/3" data-mr="दुकान नं 10, SN 34/10/3">Shop No 10, SN 34/10/3</p>
+                            <p data-en="Vishwraj Vihar, Pune 43" data-mr="विश्वराज विहार, पुणे 43">Vishwraj Vihar, Pune 43</p>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="Hours" data-mr="घंटे">Hours</h4>
+                            <p data-en="Mon - Sun: 10 AM - 8 PM" data-mr="सोम - रविवार: 10 AM - 8 PM">Mon - Sun: 10 AM – 8 PM</p>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="Email" data-mr="ईमेल">Email</h4>
+                            <a href="mailto:info@supervoltemotors.com">info@supervoltemotors.com</a>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+                        <div class="ci-body">
+                            <h4 data-en="Follow Us" data-mr="हमें फॉलो करें">Follow Us</h4>
+                            <a href="https://instagram.com/supe_rvolt" target="_blank" rel="noopener">@supe_rvolt</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="map-wrap">
+                    <iframe
+                        src="https://maps.google.com/maps?q=18.4580993,73.8486261&z=15&output=embed"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="SuperVolt EV Service Center Location">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="contact-form-wrap">
+                <h3 data-en="Send Us a Message" data-mr="हमें संदेश भेजें">Send Us a Message</h3>
+
+                <form action="https://formsubmit.co/info@supervoltemotors.com" method="POST" onsubmit="handleSubmit(event)">
+                    <input type="hidden" name="_subject" value="New Service Request — SuperVolt Motors">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name" data-en="Name" data-mr="नाम">Name</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" data-en="Email" data-mr="ईमेल">Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="you@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-phone" data-en="Phone Number" data-mr="फोन नंबर">Phone Number</label>
+                            <input type="tel" id="contact-phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-vehicle" data-en="Vehicle Model" data-mr="वाहन मॉडल">Vehicle Model</label>
+                            <input type="text" id="contact-vehicle" name="vehicle" placeholder="e.g. OLA S1 Pro">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-service" data-en="Service Required" data-mr="आवश्यक सेवा">Service Required</label>
+                        <select id="contact-service" name="service">
+                            <option value="" data-en="Select a service..." data-mr="सेवा चुनें...">Select a service...</option>
+                            <option value="General Service"     data-en="General Service"      data-mr="सामान्य सेवा">General Service</option>
+                            <option value="Battery Service"     data-en="Battery Service"      data-mr="बैटरी सेवा">Battery Service</option>
+                            <option value="Motor Service"       data-en="Motor Service"        data-mr="मोटर सेवा">Motor Service</option>
+                            <option value="Controller Diagnosis" data-en="Controller Diagnosis" data-mr="नियंत्रक निदान">Controller Diagnosis</option>
+                            <option value="Brake Service"       data-en="Brake Service"        data-mr="ब्रेक सेवा">Brake Service</option>
+                            <option value="Performance Upgrade" data-en="Performance Upgrade"  data-mr="प्रदर्शन अपग्रेड">Performance Upgrade</option>
+                            <option value="Other"               data-en="Other"                data-mr="अन्य">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message" data-en="Message" data-mr="संदेश">Message</label>
+                        <textarea id="contact-message" name="message" placeholder="Describe your issue or query..." required></textarea>
+                    </div>
+
+                    <div class="form-msg form-success" id="formSuccess">
+                        ✅ <span data-en="Thank you! We'll contact you shortly at info@supervoltemotors.com" data-mr="धन्यवाद! हम जल्द ही आपसे info@supervoltemotors.com पर संपर्क करेंगे।">Thank you! We'll contact you shortly.</span>
+                    </div>
+                    <div class="form-msg form-error" id="formError">
+                        ⚠️ <span data-en="Something went wrong. Please email info@supervoltemotors.com directly." data-mr="कुछ गलत हो गया। कृपया सीधे info@supervoltemotors.com पर ईमेल करें।">Something went wrong. Please email us directly.</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary form-submit" id="formSubmitBtn"
+                        data-en="Send Message" data-mr="संदेश भेजें">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom:16px">
+                    <div class="logo-icon"><svg viewBox="0 0 24 24" style="fill:#000"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <div class="logo-text">
+                        <span class="logo-name">SUPERVOLT</span>
+                        <span class="logo-sub">Electric Motors</span>
+                    </div>
+                </div>
+                <p data-en="Professional EV service center committed to excellence. Expert technicians, genuine parts, and customer satisfaction." data-mr="उत्कृष्टता के लिए प्रतिबद्ध व्यावसायिक EV सेवा केंद्र।">Professional EV service center committed to excellence. Expert technicians, genuine parts, and customer satisfaction.</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/supe_rvolt" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://wa.me/917972792916" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                    <a href="tel:+917972792916" class="social-link" aria-label="Call Us">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-en="Services" data-mr="सेवाएं">Services</h4>
+                <ul>
+                    <li><a href="#services" data-en="General Service"      data-mr="सामान्य सेवा">General Service</a></li>
+                    <li><a href="#services" data-en="Battery Service"      data-mr="बैटरी सेवा">Battery Service</a></li>
+                    <li><a href="#services" data-en="Motor Service"        data-mr="मोटर सेवा">Motor Service</a></li>
+                    <li><a href="#services" data-en="Performance Upgrade"  data-mr="प्रदर्शन अपग्रेड">Performance Upgrade</a></li>
+                    <li><a href="#services" data-en="Brake Service"        data-mr="ब्रेक सेवा">Brake Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-en="Quick Links" data-mr="तेज़ लिंक">Quick Links</h4>
+                <ul>
+                    <li><a href="#services" data-en="Services"  data-mr="सेवाएं">Services</a></li>
+                    <li><a href="#gallery"  data-en="Gallery"   data-mr="गैलरी">Gallery</a></li>
+                    <li><a href="#brands"   data-en="Brands"    data-mr="ब्रांड्स">Brands</a></li>
+                    <li><a href="#about"    data-en="About"     data-mr="हमारे बारे में">About</a></li>
+                    <li><a href="#contact"  data-en="Contact"   data-mr="संपर्क">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-en="Contact Info" data-mr="संपर्क जानकारी">Contact Info</h4>
+                <ul>
+                    <li><a href="tel:+917972792916">+91 7972792916</a></li>
+                    <li><a href="mailto:info@supervoltemotors.com">info@supervoltemotors.com</a></li>
+                    <li><a href="https://instagram.com/supe_rvolt" target="_blank" rel="noopener">@supe_rvolt</a></li>
+                    <li><a href="#" data-en="10 AM – 8 PM Daily" data-mr="10 AM - 8 PM दैनिक">10 AM – 8 PM Daily</a></li>
+                    <li><a href="admin.html" style="opacity:0.3;font-size:0.75rem" data-en="Admin" data-mr="Admin">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p data-en="© 2026 SuperVolt EV Service Center. All Rights Reserved." data-mr="© 2026 सुपरवोल्ट EV सेवा केंद्र। सर्वाधिकार सुरक्षित।">© 2026 SuperVolt EV Service Center. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    /* ===== LANGUAGE ===== */
+    let currentLanguage = 'en';
+
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const val = lang === 'mr' ? el.dataset.mr : el.dataset.en;
+            if (!val) return;
+            if (val.includes('<')) { el.innerHTML = val; }
+            else { el.textContent = val; }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('onclick') === "setLanguage('" + lang + "')");
+        });
+        localStorage.setItem('selectedLanguage', lang);
+        const me = document.getElementById('mob-lang-en');
+        const mm = document.getElementById('mob-lang-mr');
+        if (me) me.classList.toggle('active', lang === 'en');
+        if (mm) mm.classList.toggle('active', lang === 'mr');
+    }
+
+    /* ===== NAVIGATION ===== */
+    function scrollToContact() {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToHome(e) {
+        e && e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function toggleMenu() {
+        const nav = document.getElementById('mobile-nav');
+        const hbg = document.querySelector('.hamburger');
+        nav.classList.toggle('open');
+        hbg.classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('mobile-nav').classList.remove('open');
+        document.querySelector('.hamburger').classList.remove('open');
+    }
+    function syncMobileLang(lang) {
+        document.getElementById('mob-lang-en').classList.toggle('active', lang === 'en');
+        document.getElementById('mob-lang-mr').classList.toggle('active', lang === 'mr');
+    }
+    // Close mobile nav on outside tap
+    document.addEventListener('click', e => {
+        const nav = document.getElementById('mobile-nav');
+        const hdr = document.getElementById('site-header');
+        if (nav.classList.contains('open') && !nav.contains(e.target) && !hdr.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    /* ===== HEADER SCROLL + ACTIVE NAV ===== */
+    window.addEventListener('scroll', () => {
+        document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 20);
+
+        const sections = document.querySelectorAll('section[id]');
+        const scrollY  = window.scrollY + 90;
+        let current    = '';
+        sections.forEach(s => {
+            if (s.offsetTop <= scrollY && s.offsetTop + s.offsetHeight > scrollY) current = s.id;
+        });
+        document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (current && href === '#' + current) link.classList.add('active');
+            if (!current && (href === '#' || href === '#home')) link.classList.add('active');
+        });
+    });
+
+    /* ===== CONTACT FORM ===== */
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const btn  = document.getElementById('formSubmitBtn');
+        const ok   = document.getElementById('formSuccess');
+        const err  = document.getElementById('formError');
+
+        ok.style.display  = 'none';
+        err.style.display = 'none';
+        btn.disabled      = true;
+        btn.textContent   = currentLanguage === 'en' ? 'Sending…' : 'पाठवत आहे…';
+
+        try {
+            const res    = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+            const result = await res.json();
+            if (result.success === 'true' || result.success === true) {
+                ok.style.display = 'block';
+                ok.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                form.reset();
+            } else { throw new Error(); }
+        } catch {
+            err.style.display = 'block';
+        } finally {
+            btn.disabled    = false;
+            btn.textContent = currentLanguage === 'en' ? 'Send Message' : 'संदेश पाठवा';
+        }
+    }
+
+    /* ===== HERO VIDEO CYCLER ===== */
+    (function () {
+        const videos = [
+            'Video_Project_Headlight_compressed.mp4',
+            'Video_Project_Light_bulb_compressed.mp4',
+            'Video_Project_plugs_compressed.mp4',
+            'Video_Project_wheel_compressed.mp4',
+            'Wire_works_compressed.mp4'
+        ];
+        const els   = [
+            document.getElementById('heroVideo1'),
+            document.getElementById('heroVideo2'),
+            document.getElementById('heroVideo3')
+        ];
+        if (!els[0]) return;
+        const idx = [0, 1, 2];
+
+        function load(c) {
+            els[c].src = videos[idx[c]];
+            els[c].load();
+            els[c].play().catch(() => {});
+        }
+
+        els.forEach((el, c) => {
+            load(c);
+            el.addEventListener('ended', () => { idx[c] = (idx[c] + 1) % videos.length; load(c); });
+            el.addEventListener('error', () => { idx[c] = (idx[c] + 1) % videos.length; load(c); });
+        });
+    })();
+
+    /* ===== INIT ===== */
+    window.addEventListener('DOMContentLoaded', () => {
+        setLanguage(localStorage.getItem('selectedLanguage') || 'en');
+    });
+</script>
+
+<script src="./strapi-config.js"></script>
+<script>
+    /* ===== POPUP AD SYSTEM (Strapi) ===== */
+    (function () {
+        const DEFAULT_CONFIG = {
+            enabled:    true,
+            delay:      3,
+            frequency:  'every_visit',
+            adImageUrl: '',
+            title:      '',
+            subtitle:   '',
+            ctaText:    '',
+            ctaLink:    ''
+        };
+
+        async function loadPopupConfig() {
+            try {
+                const res = await fetch(window.STRAPI_URL + '/api/popup-ad?populate=adImage');
+                if (!res.ok) return DEFAULT_CONFIG;
+                const json = await res.json();
+                const d = json.data;
+                if (!d) return DEFAULT_CONFIG;
+                const img = d.adImage;
+                const adImageUrl = img?.url
+                    ? (img.url.startsWith('http') ? img.url : window.STRAPI_URL + img.url)
+                    : '';
+                return {
+                    enabled:    d.enabled    ?? DEFAULT_CONFIG.enabled,
+                    delay:      d.delay      ?? DEFAULT_CONFIG.delay,
+                    frequency:  d.frequency  ?? DEFAULT_CONFIG.frequency,
+                    adImageUrl: adImageUrl,
+                    title:      d.title      || '',
+                    subtitle:   d.subtitle   || '',
+                    ctaText:    d.ctaText    || '',
+                    ctaLink:    d.ctaLink    || ''
+                };
+            } catch {
+                return DEFAULT_CONFIG;
+            }
+        }
+
+        function shouldShow(cfg) {
+            if (!cfg.enabled) return false;
+            const freq = cfg.frequency;
+            if (freq === 'every_visit') return true;
+            if (freq === 'once_per_session') {
+                if (sessionStorage.getItem('sv_popup_shown')) return false;
+                sessionStorage.setItem('sv_popup_shown', '1');
+                return true;
+            }
+            if (freq === 'once_per_day') {
+                const last = parseInt(localStorage.getItem('sv_popup_ts') || '0', 10);
+                if (Date.now() - last < 86400000) return false;
+                localStorage.setItem('sv_popup_ts', Date.now().toString());
+                return true;
+            }
+            return true;
+        }
+
+        function showPopup(cfg) {
+            const overlay  = document.getElementById('popup-overlay');
+            const img      = document.getElementById('popup-img');
+            const title    = document.getElementById('popup-title');
+            const subtitle = document.getElementById('popup-subtitle');
+            const cta      = document.getElementById('popup-cta');
+
+            if (cfg.adImageUrl) {
+                img.src = cfg.adImageUrl;
+                img.onerror = () => { document.getElementById('popup-img-wrap').style.display = 'none'; };
+            } else {
+                document.getElementById('popup-img-wrap').style.display = 'none';
+            }
+
+            if (cfg.title) { title.textContent = cfg.title; title.style.display = 'block'; }
+            if (cfg.subtitle) { subtitle.textContent = cfg.subtitle; subtitle.style.display = 'block'; }
+
+            const hasBody = cfg.title || cfg.subtitle || (cfg.ctaText && cfg.ctaLink);
+            if (!hasBody) document.getElementById('popup-body').style.display = 'none';
+
+            if (cfg.ctaText && cfg.ctaLink) {
+                cta.textContent = cfg.ctaText;
+                cta.style.display = 'block';
+                cta.onclick = () => window.open(cfg.ctaLink, '_blank');
+            }
+
+            overlay.classList.add('visible');
+        }
+
+        function closePopup() {
+            document.getElementById('popup-overlay').classList.remove('visible');
+        }
+
+        document.getElementById('popup-close').addEventListener('click', closePopup);
+        document.getElementById('popup-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closePopup();
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+        window._svShowPopup = () => loadPopupConfig().then(showPopup);
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const cfg = await loadPopupConfig();
+            if (shouldShow(cfg)) {
+                setTimeout(() => showPopup(cfg), (cfg.delay || 0) * 1000);
+            }
+        });
+    })();
+</script>
+</body>
+</html>
